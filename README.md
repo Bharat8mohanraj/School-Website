@@ -1,2 +1,1 @@
-# School-Website
-SchoolWebsiteCse121
+Activity for cse 121.
