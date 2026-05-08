@@ -1,0 +1,520 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Greenfield Academy</title>
+
+    <style>
+        /* =========================
+           GENERAL STYLING
+        ========================== */
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            background-color: #f4f7fb;
+            color: #333;
+        }
+
+        /* =========================
+           HEADER
+        ========================== */
+
+        header {
+            background: #1e3c72;
+            color: white;
+            padding: 15px 20px;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .school-name {
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        /* Navigation Menu */
+        .nav-links {
+            list-style: none;
+            display: flex;
+        }
+
+        .nav-links li {
+            margin-left: 20px;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            transition: 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: #ffd700;
+        }
+
+        /* Hamburger Menu */
+        .menu-toggle {
+            display: none;
+            font-size: 28px;
+            cursor: pointer;
+        }
+
+        /* =========================
+           HOME SECTION
+        ========================== */
+
+        #home {
+            height: 100vh;
+            background: linear-gradient(rgba(30,60,114,0.7),
+                        rgba(42,82,152,0.7)),
+                        url('https://images.unsplash.com/photo-1509062522246-3755977927d7?q=80&w=1400&auto=format&fit=crop');
+            background-size: cover;
+            background-position: center;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            color: white;
+            padding: 20px;
+        }
+
+        .home-content h1 {
+            font-size: 45px;
+            margin-bottom: 15px;
+        }
+
+        .home-content p {
+            font-size: 20px;
+            margin-bottom: 20px;
+        }
+
+        /* Button Styling */
+        .btn {
+            background: #ffd700;
+            color: #333;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: 0.3s;
+            font-size: 16px;
+        }
+
+        .btn:hover {
+            background: white;
+            transform: scale(1.05);
+        }
+
+        /* Welcome Message */
+        #welcomeMessage {
+            margin-top: 15px;
+            font-size: 18px;
+            display: none;
+        }
+
+        /* =========================
+           SECTION COMMON STYLING
+        ========================== */
+
+        section {
+            padding: 60px 20px;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 30px;
+            color: #1e3c72;
+            font-size: 32px;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: auto;
+        }
+
+        /* =========================
+           ABOUT SECTION
+        ========================== */
+
+        #about p {
+            text-align: center;
+            font-size: 18px;
+        }
+
+        /* =========================
+           COURSES SECTION
+        ========================== */
+
+        .courses-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+
+        .course-card {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 4px 10px rgba(0,0,0,0.1);
+            transition: 0.3s;
+        }
+
+        .course-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .course-card h3 {
+            color: #1e3c72;
+            margin-bottom: 10px;
+        }
+
+        /* =========================
+           CONTACT SECTION
+        ========================== */
+
+        form {
+            max-width: 600px;
+            margin: auto;
+            background: white;
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0px 4px 10px rgba(0,0,0,0.1);
+        }
+
+        form input,
+        form textarea {
+            width: 100%;
+            padding: 12px;
+            margin-top: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        form textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        .error {
+            color: red;
+            font-size: 14px;
+            margin-top: 5px;
+        }
+
+        /* =========================
+           FOOTER
+        ========================== */
+
+        footer {
+            background: #1e3c72;
+            color: white;
+            text-align: center;
+            padding: 15px;
+        }
+
+        /* =========================
+           RESPONSIVE DESIGN
+        ========================== */
+
+        @media (max-width: 768px) {
+
+            .menu-toggle {
+                display: block;
+            }
+
+            .nav-links {
+                display: none;
+                flex-direction: column;
+                background: #1e3c72;
+                position: absolute;
+                top: 60px;
+                right: 0;
+                width: 200px;
+                padding: 20px;
+            }
+
+            .nav-links.active {
+                display: flex;
+            }
+
+            .nav-links li {
+                margin: 15px 0;
+            }
+
+            .home-content h1 {
+                font-size: 32px;
+            }
+
+            .home-content p {
+                font-size: 18px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- =========================
+         HEADER SECTION
+    ========================== -->
+
+    <header>
+        <nav class="navbar">
+            <div class="school-name">Greenfield Academy</div>
+
+            <!-- Hamburger Menu Icon -->
+            <div class="menu-toggle" id="menuToggle">
+                ☰
+            </div>
+
+            <!-- Navigation Links -->
+            <ul class="nav-links" id="navLinks">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#courses">Courses</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- =========================
+         HOME SECTION
+    ========================== -->
+
+    <section id="home">
+        <div class="home-content">
+            <h1>Welcome to Greenfield Academy</h1>
+            <p>Empowering students with knowledge and creativity.</p>
+
+            <!-- Interactive Button -->
+            <button class="btn" onclick="showWelcomeMessage()">
+                Click Me
+            </button>
+
+            <!-- Hidden Message -->
+            <p id="welcomeMessage">
+                Welcome to our school!
+            </p>
+        </div>
+    </section>
+
+    <!-- =========================
+         ABOUT SECTION
+    ========================== -->
+
+    <section id="about">
+        <div class="container">
+            <h2 class="section-title">About Us</h2>
+
+            <p>
+                Greenfield Academy is dedicated to providing quality education
+                and helping students achieve academic excellence. We focus on
+                innovation, creativity, and overall personality development.
+            </p>
+        </div>
+    </section>
+
+    <!-- =========================
+         COURSES SECTION
+    ========================== -->
+
+    <section id="courses">
+        <div class="container">
+            <h2 class="section-title">Our Courses</h2>
+
+            <div class="courses-container">
+
+                <div class="course-card">
+                    <h3>Computer Science</h3>
+                    <p>
+                        Learn programming, web development, and modern technology skills.
+                    </p>
+                </div>
+
+                <div class="course-card">
+                    <h3>Mathematics</h3>
+                    <p>
+                        Build strong analytical and problem-solving abilities.
+                    </p>
+                </div>
+
+                <div class="course-card">
+                    <h3>Science</h3>
+                    <p>
+                        Explore physics, chemistry, and biology through practical learning.
+                    </p>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- =========================
+         CONTACT SECTION
+    ========================== -->
+
+    <section id="contact">
+        <div class="container">
+            <h2 class="section-title">Contact Us</h2>
+
+            <form id="contactForm">
+
+                <!-- Name Input -->
+                <input type="text" id="name" placeholder="Enter your name">
+                <div class="error" id="nameError"></div>
+
+                <!-- Email Input -->
+                <input type="email" id="email" placeholder="Enter your email">
+                <div class="error" id="emailError"></div>
+
+                <!-- Message Input -->
+                <textarea id="message" placeholder="Enter your message"></textarea>
+                <div class="error" id="messageError"></div>
+
+                <!-- Submit Button -->
+                <button type="submit" class="btn" style="margin-top:15px;">
+                    Submit
+                </button>
+
+            </form>
+        </div>
+    </section>
+
+    <!-- =========================
+         FOOTER
+    ========================== -->
+
+    <footer>
+        <p>© 2026 Greenfield Academy | All Rights Reserved</p>
+    </footer>
+
+    <!-- =========================
+         JAVASCRIPT SECTION
+    ========================== -->
+
+    <script>
+
+        // =========================
+        // MOBILE MENU TOGGLE
+        // =========================
+
+        const menuToggle = document.getElementById("menuToggle");
+        const navLinks = document.getElementById("navLinks");
+
+        menuToggle.addEventListener("click", () => {
+            navLinks.classList.toggle("active");
+        });
+
+        // =========================
+        // WELCOME MESSAGE BUTTON
+        // =========================
+
+        function showWelcomeMessage() {
+
+            const message = document.getElementById("welcomeMessage");
+
+            // Toggle message visibility
+            if (message.style.display === "none" || message.style.display === "") {
+                message.style.display = "block";
+            } else {
+                message.style.display = "none";
+            }
+        }
+
+        // =========================
+        // FORM VALIDATION
+        // =========================
+
+        const contactForm = document.getElementById("contactForm");
+
+        contactForm.addEventListener("submit", function(event) {
+
+            // Prevent page refresh
+            event.preventDefault();
+
+            // Get input values
+            const name = document.getElementById("name").value.trim();
+            const email = document.getElementById("email").value.trim();
+            const message = document.getElementById("message").value.trim();
+
+            // Error fields
+            const nameError = document.getElementById("nameError");
+            const emailError = document.getElementById("emailError");
+            const messageError = document.getElementById("messageError");
+
+            // Clear old errors
+            nameError.textContent = "";
+            emailError.textContent = "";
+            messageError.textContent = "";
+
+            let isValid = true;
+
+            // =========================
+            // NAME VALIDATION
+            // =========================
+
+            if (name === "") {
+                nameError.textContent = "Please enter your name.";
+                isValid = false;
+            }
+
+            // =========================
+            // EMAIL VALIDATION
+            // =========================
+
+            const emailPattern =
+                /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+            if (email === "") {
+                emailError.textContent = "Please enter your email.";
+                isValid = false;
+            }
+            else if (!emailPattern.test(email)) {
+                emailError.textContent = "Please enter a valid email.";
+                isValid = false;
+            }
+
+            // =========================
+            // MESSAGE VALIDATION
+            // =========================
+
+            if (message === "") {
+                messageError.textContent = "Please enter your message.";
+                isValid = false;
+            }
+
+            // =========================
+            // SUCCESS MESSAGE
+            // =========================
+
+            if (isValid) {
+
+                alert("Form submitted successfully!");
+
+                // Reset form
+                contactForm.reset();
+            }
+
+        });
+
+    </script>
+
+</body>
+</html>
